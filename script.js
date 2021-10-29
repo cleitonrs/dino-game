@@ -2,12 +2,17 @@ const dino = document.querySelector('.dino')
 const background = document.querySelector('.background')
 let isJumping = false
 let position = 0
+let sound = document.getElementById('sound')
 
+function soundPlay() {
+  sound.play()
+}
 
 function handleKeyDown(event) {
   if (event.keyCode === 32) {
     if (!isJumping) {
       jump()
+      soundPlay()
     }
   }
 }
