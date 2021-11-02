@@ -3,23 +3,26 @@ const background = document.querySelector('.background')
 let isJumping = false
 let position = 0
 let sound = document.getElementById('sound')
+let soundJump = new Audio('./sounds/somPulo.mp3')
+
 
 function soundPlay() {
-  sound.play()
+  // sound.play()
 }
+
 
 function handleKeyDown(event) {
   if (event.keyCode === 32) {
     if (!isJumping) {
       jump()
-      soundPlay()
+      soundJump.play()
     }
   }
 }
 
 function jump() {
   isJumping = true
-  let upInterval =  setInterval(() => {
+  let upInterval = setInterval(() => {
     if (position >= 200) {
       clearInterval(upInterval)
 
@@ -45,7 +48,7 @@ function createCactus() {
   const cactus = document.createElement('div')
   let cactusPosition = 1000
   let randomTime = Math.floor(Math.random() * 6000)
-  
+
   cactus.classList.add('cactus')
   cactus.style.left = `${cactusPosition}px`
   background.appendChild(cactus)
@@ -55,17 +58,17 @@ function createCactus() {
       clearInterval(leftInterval)
       background.removeChild(cactus)
     } else if (cactusPosition > 0 && cactusPosition < 60 && position < 60) {
-        // Gamer Over
+      // Gamer Over
       clearInterval(leftInterval)
       document.body.innerHTML = '<h1 class="game-over">Fim de Jogo</h1>'
-    } 
-      else {
+    }
+    else {
       cactusPosition -= 10
       cactus.style.left = `${cactusPosition}px`
     }
   }, 20)
 
-  setTimeout(createCactus, randomTime   )
+  setTimeout(createCactus, randomTime)
 }
 
 createCactus()
