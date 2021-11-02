@@ -2,20 +2,18 @@ const dino = document.querySelector('.dino')
 const background = document.querySelector('.background')
 let isJumping = false
 let position = 0
-let sound = document.getElementById('sound')
-let soundJump = new Audio('./sounds/somPulo.mp3')
+let backgroundSound = new Audio('./sounds/trilhaJogo.mp3')
+let jumpSound = new Audio('./sounds/somPulo.mp3')
 
-
-function soundPlay() {
-  // sound.play()
-}
 
 
 function handleKeyDown(event) {
   if (event.keyCode === 32) {
     if (!isJumping) {
+      backgroundSound.play()
+      backgroundSound.loop = true
       jump()
-      soundJump.play()
+      jumpSound.play()
     }
   }
 }
@@ -61,6 +59,9 @@ function createCactus() {
       // Gamer Over
       clearInterval(leftInterval)
       document.body.innerHTML = '<h1 class="game-over">Fim de Jogo</h1>'
+      jumpSound = new Audio('')
+      backgroundSound.pause()
+      backgroundSound = new Audio('')
     }
     else {
       cactusPosition -= 10
