@@ -4,6 +4,7 @@ let isJumping = false
 let position = 0
 let backgroundSound = new Audio('./sounds/trilhaJogo.mp3')
 let jumpSound = new Audio('./sounds/somPulo.mp3')
+let gamerOver = new Audio('./sounds/gameOver.mp3')
 
 
 
@@ -62,6 +63,8 @@ function createCactus() {
       jumpSound = new Audio('')
       backgroundSound.pause()
       backgroundSound = new Audio('')
+      gamerOver.play()
+      gamerOver = new Audio('')
     }
     else {
       cactusPosition -= 10
