@@ -1,12 +1,21 @@
 const dino = document.querySelector('.dino')
 const background = document.querySelector('.background')
+let scoreValue = document.querySelector('.score')
+let score = 0
+let maxScore =0
 let isJumping = false
 let position = 0
 let backgroundSound = new Audio('./sounds/trilhaJogo.mp3')
 let jumpSound = new Audio('./sounds/somPulo.mp3')
 let gamerOver = new Audio('./sounds/gameOver.mp3')
 
-
+let scoreCount = () => {
+  if (score < 999999) {
+    score += 1
+    scoreValue.innerHTML = `Pontos: ${score}`
+  }
+  setTimeout(scoreCount, 100)
+}
 
 function handleKeyDown(event) {
   if (event.keyCode === 32) {
@@ -59,7 +68,9 @@ function createCactus() {
     } else if (cactusPosition > 0 && cactusPosition < 60 && position < 60) {
       // Gamer Over
       clearInterval(leftInterval)
-      document.body.innerHTML = '<h1 class="game-over">Fim de Jogo</h1>'
+      maxScore = score > maxScore ? score : maxScore
+      document.body.innerHTML = `<h1 class="game-over">Fim de Jogo</h1><br><h2>Pontos: ${maxScore}</h2>` 
+      scoreCount = ''
       jumpSound = new Audio('')
       backgroundSound.pause()
       backgroundSound = new Audio('')
@@ -75,6 +86,8 @@ function createCactus() {
   setTimeout(createCactus, randomTime)
 }
 
+scoreCount()
 createCactus()
+
 
 document.addEventListener('keydown', handleKeyDown)
